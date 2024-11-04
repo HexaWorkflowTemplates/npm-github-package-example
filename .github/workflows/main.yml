@@ -2,6 +2,9 @@ name: Manually Triggered NPM Workflow
 on:
   workflow_dispatch:
 jobs:
+  call-codeQL-analysis:
+    name: CodeQL analysis
+    uses: HexaWorkflowTemplates/CalledWorkflows/.github/workflows/codeql-analysis.yml@main
   my-job:
     # Importing a reusable workflow from another repository and branch
     uses: HexaWorkflowTemplates/CalledWorkflows/.github/workflows/nodejs-build-unittest.yml@main
