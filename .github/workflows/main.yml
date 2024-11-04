@@ -18,7 +18,7 @@ on:
   
 jobs:
   call-codeQL-analysis:
-    name: CodeQL analysis
+    name: Dummy CodeQL analysis (Advanced Security is disabled in free private repos)
     uses: HexaWorkflowTemplates/CalledWorkflows/.github/workflows/codeql-analysis.yml@main
   NodeBuildAndTest:
     # Importing a reusable workflow from another repository and branch
