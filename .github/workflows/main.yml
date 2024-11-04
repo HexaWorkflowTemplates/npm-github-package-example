@@ -1,7 +1,28 @@
 name: Manually Triggered NPM Workflow
 on:
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      languages:
+        description: "Optional input to set languages for CodeQL check. Supported values are: 'cpp', 'csharp', 'go', 'java', 'javascript', 'typescript', 'python', 'ruby'. To set multiple languages, use the same syntax as you can see in the default value."
+        required: false
+        type: string
+        default: '["python"]'
+      codeql-cfg-path:
+        description: "Optional input to set path to a CodeQL config file"
+        required: false
+        type: string
+      build-command:
+        description: "Optional input to specify manual build command. The multiline syntax is supported"
+        required: false
+        type: string
+  
 jobs:
   call-codeQL-analysis:
     name: CodeQL analysis
     uses: HexaWorkflowTemplates/CalledWorkflows/.github/workflows/codeql-analysis.yml@main
+  NodeBuildAndTest:
+    # Importing a reusable workflow from another repository and branch
+    uses: HexaWorkflowTemplates/CalledWorkflows/.github/workflows/nodejs-build-unittest.yml@main
+    # Passing 'node-version' as an input parameter to the reusable workflow
+    with:
+      node-version: '18.x'
