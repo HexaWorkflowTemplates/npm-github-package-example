@@ -17,9 +17,6 @@ on:
         type: string
   
 jobs:
-  call-codeQL-analysis:
-    name: Dummy CodeQL analysis (Advanced Security is disabled in free private repos)
-    uses: HexaWorkflowTemplates/CalledWorkflows/.github/workflows/codeql-analysis.yml@main
   NodeBuildAndTest:
     # Importing a reusable workflow from another repository and branch
     uses: HexaWorkflowTemplates/CalledWorkflows/.github/workflows/nodejs-build-unittest.yml@main
@@ -27,3 +24,6 @@ jobs:
     with:
       node-version: '18.x'
       languages: '["javascript","typescript"]'
+  SonarQubeAnalysis:
+    name: SonarCloud Scan
+    uses: HexaWorkflowTemplates/CalledWorkflows/.github/workflows/sonarscan.yml@main
